@@ -1,0 +1,46 @@
+import serial 
+from pynput.mouse import Controller, Button
+import time
+mouse = Controller()
+y = 0
+x = 0
+aanraak = 0
+def plaatsX(s):
+    if int(s)>750:
+        return ('rechts')
+    elif int(s)<300:
+        return ('links')
+    else:
+        return ('midden')
+    
+def plaatsY(sm):
+    if int(sm) >700:
+        return ('onder')
+    elif int(sm)<400:
+        return ('boven')
+    else:
+        return ('midden')
+
+ser = serial.Serial('COM4', 9600, timeout=1)  # Windows voorbeeld
+
+
+try:
+    while True:
+        line = ser.readline().decode('utf-8', errors='replace').strip()
+
+        if line:
+            
+            lijstje = line.split(',') 
+            x = 2*int(lijstje[0])-300
+            y = int(1.5*int(lijstje[1]))-400
+            touch = int(lijstje[2])
+            
+            
+            if touch == 1 
+                mouse.position = (x,y)
+                print(plaatsX(lijstje[0]),plaatsY(lijstje[1]))
+            
+
+            
+finally:
+    ser.close()
