@@ -1,0 +1,32 @@
+const int dig = A2; // 1 
+const int xas = A0; // 1
+const int yas = A1; // 1
+
+int toucht; 
+int ys;
+int xs;
+int touch;
+
+void setup(){
+  pinMode(dig,INPUT);
+  pinMode(xas,INPUT);
+  pinMode(yas,INPUT);
+  Serial.begin(9600);
+}
+void loop(){
+  ys = analogRead(yas); 
+  xs = analogRead(xas);
+  touch= analogRead(dig);
+
+  if (touch>=1015){ 
+    toucht = 1;
+  }
+  else{
+    toucht = 0;
+  }
+  Serial.print(xs);
+  Serial.print(",");
+  Serial.print(ys);
+  Serial.print(",");
+  Serial.println(toucht);
+}
